@@ -65,7 +65,7 @@ public class MessageConsumer {
             while(true){
                 ConsumerRecords<String,String> records = consumer.poll(1000);
                 for(ConsumerRecord<String,String> record:records){
-                    System.out.println("record key:"+record.key()+",record value:"+record.value());
+                    System.out.println("record key:"+record.key()+",partition:"+record.partition()+",record value:"+record.value());
                 }
                 consumer.commitAsync(new OffsetCommitCallback() {
                     @Override

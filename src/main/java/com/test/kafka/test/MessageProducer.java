@@ -31,10 +31,11 @@ public class MessageProducer {
     private static Properties initConfig(){
         Properties properties = new Properties();
         //设置kakfa broker列表
-        properties.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,BROKER_LIST);
+        properties.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG,BROKER_LIST);
         //设置序列化类
-        properties.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
-        properties.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+        properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+        properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
+        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,MyPartitioner.class.getName());
         return properties;
     }
 
@@ -43,7 +44,7 @@ public class MessageProducer {
         for(int i = 1;i<=MSG_NUM;i++){
             Message message = new Message();
             message.setMessageInfo("这是第"+i+"条信息!");
-            record = new ProducerRecord<String,String>(TOPIC,null,message.getMessageId(),message.toString());
+            record = new ProducerRecord<String,String>(TOPIC,message.getMessageId(),message.toString());
             producer.send(record, new Callback() {
                 @Override
                 public void onCompletion(RecordMetadata recordMetadata, Exception e) {

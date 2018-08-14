@@ -14,7 +14,9 @@ import java.util.UUID;
  **/
 public class Message implements Serializable{
 
-    private String messageId = UUID.randomUUID().toString();
+    private static int id = 0;
+
+    private String messageId = String.valueOf(++id);
 
     private String messageInfo;
 

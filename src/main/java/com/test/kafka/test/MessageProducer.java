@@ -16,9 +16,9 @@ import java.util.Properties;
  **/
 public class MessageProducer {
 
-    private static final int MSG_NUM = 100000;
+    private static final int MSG_NUM = 10000;
 
-    private static final String TOPIC = "test";
+    private static final String TOPIC = "streams-foo";
 
     private static final String BROKER_LIST = "localhost:9092";
 
@@ -35,7 +35,7 @@ public class MessageProducer {
         //设置序列化类
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,StringSerializer.class.getName());
-        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,MyPartitioner.class.getName());
+//        properties.put(ProducerConfig.PARTITIONER_CLASS_CONFIG,MyPartitioner.class.getName());
         return properties;
     }
 

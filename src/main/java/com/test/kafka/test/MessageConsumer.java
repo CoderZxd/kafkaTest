@@ -22,7 +22,7 @@ import java.util.Properties;
  **/
 public class MessageConsumer {
 
-    private static  final String TOPIC = "test";
+    private static  final String TOPIC = "streams-foo";
 
     private static final String BROKER_LIST = "localhost:9092";
 
